@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/
+bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3
+/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <style>
+
+body {
+
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    }
+
+    p {
+  color: braun;
+  padding: 14px 20px;
+  background-color: #4CAF50;
+  font-size: 100%;
+}
+
+    input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+    input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+    input[type=submit] {
+  width: 100%;
+  background-color: #4CAF30;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+<h1>UWAGA: ta strona nie jest ukończona bowiem przedmiotowa aplikacja może zostać rozbudowana o kolejne funkcjonalności  </h1>
+<h6 th:text="${message3}">Uzupełnij!</h6>
+<p>Niniejszy formularz pozwala administratorowi na zmianę stawek i limitów refundacji podróży służbowych  </p>
+
+
+<form id="myForm" action="/sdAdm" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+
+    <label for="nameF">podaj nazwę formularza, który chcesz zmienić:</label><br>
+    <input type="text" id="nameF" name="nameF"
+           placeholder=" wpisz: ABC "><br><br>
+    <label for="dietaStawka">Podaj nową stawkę diety:</label><br>
+    <input type="number" id="dietaStawka" name="dietaStawka"><br><br>
+    <button type="submit">Zatwierdź</button>
+</form>
+
+<script>
+document.getElementById('myForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Zapobiegaj domyślnemu zachowaniu przesyłania formularza
+
+    const formData = new FormData(this);
+
+    fetch('/sdAdm', {
+        method: 'POST', // Użyj metody POST
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // Obsłuż sukces
+            console.log('Sukces!');
+        } else {
+            // Obsłuż błąd
+            console.error('Błąd:', response.status);
+        }
+    })
+    .catch(error => {
+        console.error('Błąd:', error);
+    });
+});
+</script>
+<p>
+    <a href="/wnioski">Zobacz listę wszystkich wniosków</a>
+</p>
+
+<form id="" action="" method="">
+
+    <label for="nameF2">podaj nazwę formularza, który chcesz zmienić:</label><br>
+    <input type="text" id="nameF2" name="nameF2"
+           placeholder=" wpisz: ABC "><br><br>
+    <label for="StawkaKM">Podaj nową stawkę za przejechany km:</label><br>
+    <input type="number" id="StawkaKM" name="StawkaKM"><br><br>
+<!--    <button type="submit">Zatwierdź</button>-->
+</form>
+
+
+<p>
+<a href="/wnioski">Zobacz listę wszystkich wniosków</a>
+</p>
+
+
+
+</body>
+</html>
